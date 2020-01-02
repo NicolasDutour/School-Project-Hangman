@@ -36,6 +36,15 @@ class App extends Component {
 			)
 	}
 
+	handleClickLetter = (e) => {
+		let letter = e.target.value
+		this.setState({
+			wordOnConstruction: this.state.wordOnConstruction.add(letter),
+			tries:
+				this.state.tries + (this.state.wordToGuess.includes(letter) ? 0 : 1)
+		})
+	}
+
 	render() {
 		const { tries, wordToGuess } = this.state
 
@@ -46,7 +55,9 @@ class App extends Component {
 				</div>
 				<div className='row justify-content-center'>
 					<div className='col-md-4 text-center'>
-						<h1>Tries: ...</h1>
+						<h1>
+							Tries: {tries} / {this.maxTries}
+						</h1>
 					</div>
 					<div className='col-md-4 text-center'>Perdu ou Gagné</div>
 					<div className='col-md-4 text-center'>
