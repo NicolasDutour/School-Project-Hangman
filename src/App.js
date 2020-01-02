@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './App.css'
 import Letter from './components/Letter'
 import { randomWord } from './Utils'
@@ -51,6 +51,7 @@ class App extends Component {
 
 	render() {
 		const { tries, wordToGuess } = this.state
+		const gameOver = tries >= this.maxTries
 
 		return (
 			<div className='App'>
@@ -63,14 +64,32 @@ class App extends Component {
 							Tries: {tries} / {this.maxTries}
 						</h1>
 					</div>
-					<div className='col-md-4 text-center'>Perdu ou Gagné</div>
 					<div className='col-md-4 text-center'>
-						<h1>
-							{' '}
-							{!(tries >= this.maxTries)
-								? this.guessedWord()
-								: wordToGuess}{' '}
-						</h1>
+						{(gameOver && (
+							<Fragment>
+								<h1> Perdu ! </h1>
+								<button
+									type='button'
+									className='btn btn-primary'
+									onClick={this.newGame}>
+									New Game
+								</button>
+							</Fragment>
+						)) ||
+							(wordToGuess === this.guessedWord().join('') && (
+								<Fragment>
+									<h1> Gagné ! </h1>
+									<button
+										type='button'
+										className='btn btn-primary'
+										onClick={this.newGame}>
+										New Game
+									</button>
+								</Fragment>
+							))}
+					</div>
+					<div className='col-md-4 text-center'>
+						<h1> {!gameOver ? this.guessedWord() : wordToGuess} </h1>
 					</div>
 				</div>
 				<div className='row justify-content-center'>
