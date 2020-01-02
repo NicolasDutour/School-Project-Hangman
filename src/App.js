@@ -21,7 +21,11 @@ class App extends Component {
 			.map((letter) => (
 				<Letter
 					click={this.handleClickLetter}
-					disabled={this.state.wordOnConstruction.has(letter)}
+					disabled={
+						this.state.wordOnConstruction.has(letter) ||
+						this.state.tries === this.maxTries ||
+						this.state.wordToGuess === this.guessedWord().join('')
+					}
 					key={letter}
 					letter={letter.toUpperCase()}
 				/>
