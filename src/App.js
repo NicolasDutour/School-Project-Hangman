@@ -49,6 +49,14 @@ class App extends Component {
 		})
 	}
 
+	newGame = () => {
+		this.setState({
+			tries: 0,
+			wordOnConstruction: new Set([]),
+			wordToGuess: randomWord()
+		})
+	}
+
 	render() {
 		const { tries, wordToGuess } = this.state
 		const gameOver = tries >= this.maxTries
