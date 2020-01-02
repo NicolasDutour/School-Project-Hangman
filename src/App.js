@@ -28,7 +28,17 @@ class App extends Component {
 			))
 	}
 
+	guessedWord = () => {
+		return this.state.wordToGuess
+			.split('')
+			.map((letter) =>
+				this.state.wordOnConstruction.has(letter) ? letter : ' _ '
+			)
+	}
+
 	render() {
+		const { tries } = this.state
+
 		return (
 			<div className='App'>
 				<div className='row justify-content-center'>
@@ -45,7 +55,9 @@ class App extends Component {
 				</div>
 				<div className='row justify-content-center'>
 					<div className='col-md-6 text-center'>{this.generateKeyboard()}</div>
-					<div className='col-md-6 text-center'>IMAGE HANGMAN</div>
+					<div className='col-md-6 text-center image-container'>
+						<img src={`img/${tries}.jpg`} alt='Hangman' />
+					</div>
 				</div>
 			</div>
 		)
