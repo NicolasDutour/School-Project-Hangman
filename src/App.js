@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-
+import Letter from './components/Letter'
 import { randomWord } from './Utils'
 
 class App extends Component {
@@ -13,6 +13,19 @@ class App extends Component {
 			wordOnConstruction: new Set([]),
 			wordToGuess: randomWord()
 		}
+	}
+
+	generateKeyboard = () => {
+		return this.state.letters
+			.split('')
+			.map((letter) => (
+				<Letter
+					click={this.handleClickLetter}
+					disabled={this.state.wordOnConstruction.has(letter)}
+					key={letter}
+					letter={letter.toUpperCase()}
+				/>
+			))
 	}
 
 	render() {
@@ -31,7 +44,7 @@ class App extends Component {
 					</div>
 				</div>
 				<div className='row justify-content-center'>
-					<div className='col-md-6 text-center'>KEYBOARD</div>
+					<div className='col-md-6 text-center'>{this.generateKeyboard()}</div>
 					<div className='col-md-6 text-center'>IMAGE HANGMAN</div>
 				</div>
 			</div>
