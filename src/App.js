@@ -37,7 +37,7 @@ class App extends Component {
 	}
 
 	render() {
-		const { tries } = this.state
+		const { tries, wordToGuess } = this.state
 
 		return (
 			<div className='App'>
@@ -50,7 +50,12 @@ class App extends Component {
 					</div>
 					<div className='col-md-4 text-center'>Perdu ou Gagné</div>
 					<div className='col-md-4 text-center'>
-						<h1> DISPLAY WORD </h1>
+						<h1>
+							{' '}
+							{!(tries >= this.maxTries)
+								? this.guessedWord()
+								: wordToGuess}{' '}
+						</h1>
 					</div>
 				</div>
 				<div className='row justify-content-center'>
